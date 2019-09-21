@@ -1,15 +1,16 @@
-var rect = require('./rectangle.js');
+const http = require('http');
 
-function solve(l,b){
-    console.log("l   " + l + "   b    " + b);
+const hostname = 'localhost';
+const port = 3000;
 
-    if(l<=0 || b<=0)
-    console.log("Invalid Dimensions");
-    else{
-        console.log("Area" + rect.area(l,b));
-        console.log("Perimeter" + rect.perimeter(l,b));
-        console.log(rect);
-    }
-}
+const server = http.createServer((req,res) => {
+    console.log(req.headers);
+    
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html');
+    res.end('<html><body><h1>Hello World</h1></body></html>');
+})
 
-solve(2,3);
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname} : ${port}`)
+});
